@@ -36,8 +36,9 @@
   --container: 1220px;
   --header-h: 62px;
 
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  /* Onest и Golos Text са проектирани с пълна кирилица. */
+  --font-display: "Onest", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font: "Golos Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   --ease: cubic-bezier(.4, 0, .2, 1);
 }
@@ -72,14 +73,16 @@ a:hover { text-decoration: underline; }
 
 h1, h2, h3, h4 {
   margin: 0 0 .5em;
-  line-height: 1.12;
-  letter-spacing: -.022em;
+  font-family: var(--font-display);
+  line-height: 1.14;
+  letter-spacing: -.018em;
   font-weight: 700;
+  text-wrap: balance;
   color: var(--ink);
 }
 
-h1 { font-size: clamp(2.1rem, 5.2vw, 3.4rem); }
-h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); }
+h1 { font-size: clamp(1.95rem, 4.4vw, 3rem); }
+h2 { font-size: clamp(1.55rem, 3.1vw, 2.2rem); }
 h3 { font-size: clamp(1.15rem, 2vw, 1.4rem); }
 
 p { margin: 0 0 1em; }
@@ -245,6 +248,7 @@ ul { margin: 0 0 1em; padding-left: 1.15em; }
   display: inline-flex;
   align-items: center;
   gap: 9px;
+  font-family: var(--font-display);
   font-size: 1.28rem;
   font-weight: 700;
   letter-spacing: -.03em;
@@ -324,23 +328,30 @@ ul { margin: 0 0 1em; padding-left: 1.15em; }
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(900px 520px at 78% 12%, #e9f1fb 0%, rgba(233, 241, 251, 0) 62%),
+    radial-gradient(820px 480px at 76% 16%, #e9f1fb 0%, rgba(233, 241, 251, 0) 64%),
     linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 100%);
   border-bottom: 1px solid var(--line-soft);
 }
 .hero__inner {
   display: grid;
-  grid-template-columns: 1.05fr .95fr;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr);
   align-items: center;
-  gap: 44px;
-  padding: clamp(48px, 7vw, 88px) 0;
+  gap: clamp(24px, 4vw, 56px);
+  padding: clamp(44px, 6vw, 76px) 0;
 }
-.hero h1 { margin-bottom: 18px; }
+
+.hero h1 {
+  margin-bottom: 18px;
+  /* Кирилските думи са дълги — пренасяне само между думи, никога в дума. */
+  overflow-wrap: normal;
+  hyphens: none;
+}
 .hero h1 em { font-style: normal; color: var(--brand); }
+
 .hero__lead {
-  font-size: clamp(1.05rem, 1.8vw, 1.24rem);
+  font-size: clamp(1.02rem, 1.5vw, 1.18rem);
   color: var(--ink-soft);
-  max-width: 34em;
+  max-width: 40ch;
   margin-bottom: 26px;
 }
 
@@ -348,7 +359,7 @@ ul { margin: 0 0 1em; padding-left: 1.15em; }
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
-  margin-top: 28px;
+  margin: 26px 0 0;
   padding: 0;
   list-style: none;
 }
@@ -371,25 +382,37 @@ ul { margin: 0 0 1em; padding-left: 1.15em; }
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 340px;
+  min-height: 320px;
 }
-.hero__art svg { width: min(100%, 420px); height: auto; filter: drop-shadow(0 26px 44px rgba(0, 0, 0, .16)); }
+.hero__art > svg {
+  /* Ограничаваме по височина — иначе телефонът разтяга целия екран. */
+  width: auto;
+  max-width: 100%;
+  height: min(52vh, 420px);
+  filter: drop-shadow(0 26px 44px rgba(0, 0, 0, .16));
+}
 
 .hero__badge {
   position: absolute;
-  right: 2%;
+  left: 0;
   bottom: 8%;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 20px;
+  padding: 13px 19px;
   border-radius: var(--radius);
   background: #fff;
   box-shadow: var(--shadow-lg);
 }
-.hero__badge strong { display: block; font-size: 1.5rem; line-height: 1; letter-spacing: -.03em; }
-.hero__badge small { color: var(--muted); font-size: .82rem; }
-.hero__badge svg { width: 30px; height: 30px; color: var(--brand); }
+.hero__badge strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+}
+.hero__badge small { display: block; color: var(--muted); font-size: .82rem; }
+.hero__badge > svg { width: 28px; height: 28px; color: var(--brand); flex: none; }
 
 /* --------------------------------------------------------------------------
    6. Плочки за устройства
@@ -629,7 +652,11 @@ table.price thead th {
 table.price tbody tr:last-child th,
 table.price tbody tr:last-child td { border-bottom: 0; }
 table.price tbody tr:hover { background: #fafafc; }
-table.price td.num { white-space: nowrap; font-weight: 600; }
+table.price td.num {
+  white-space: nowrap;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
 table.price th[scope="row"] { font-weight: 600; }
 
 .price-note {
@@ -765,7 +792,7 @@ table.price th[scope="row"] { font-weight: 600; }
   align-items: center;
 }
 .page-hero__art { display: grid; place-items: center; }
-.page-hero__art svg { width: min(100%, 260px); filter: drop-shadow(0 18px 34px rgba(0, 0, 0, .14)); }
+.page-hero__art > svg { width: min(100%, 260px); filter: drop-shadow(0 18px 34px rgba(0, 0, 0, .14)); }
 
 .breadcrumbs {
   display: flex;
@@ -898,11 +925,17 @@ table.price th[scope="row"] { font-weight: 600; }
   .courier,
   .contact-grid { grid-template-columns: 1fr; }
 
-  .hero__art { order: -1; min-height: 0; }
-  .hero__art svg { width: min(74%, 300px); }
-  .hero__badge { right: 4%; bottom: 0; padding: 11px 16px; }
-  .page-hero__art { order: -1; }
-  .page-hero__art svg { width: min(52%, 190px); }
+  /* На тесен екран водещи са заглавието и бутоните, илюстрацията идва след тях. */
+  .hero__inner { gap: 30px; }
+  .hero__art { order: 0; min-height: 0; gap: 16px; }
+  .hero__art > svg { width: auto; height: min(34vh, 280px); }
+  .hero__badge {
+    position: static;
+    padding: 11px 18px;
+    box-shadow: var(--shadow);
+  }
+  .page-hero__art { order: 0; }
+  .page-hero__art > svg { width: auto; height: min(26vh, 200px); }
 }
 
 @media (max-width: 640px) {
@@ -915,16 +948,11 @@ table.price th[scope="row"] { font-weight: 600; }
   .fab { padding: 13px 18px; }
   .fab span { display: none; }
   .hero__inner { gap: 26px; }
-  .hero__art { gap: 14px; }
-  .hero__art svg { width: min(46%, 168px); }
-  .hero__badge {
-    position: static;
-    padding: 10px 16px;
-    box-shadow: var(--shadow);
-  }
+  .hero__art > svg { height: min(30vh, 230px); }
+  .hero__badge { padding: 10px 16px; }
   .hero__badge strong { font-size: 1.15rem; }
   .hero__badge small { font-size: .78rem; white-space: nowrap; }
-  .page-hero__art svg { width: min(40%, 140px); }
+  .page-hero__art > svg { height: min(22vh, 165px); }
   .cta { border-radius: var(--radius-lg); }
   .courier { border-radius: var(--radius-lg); }
 }
