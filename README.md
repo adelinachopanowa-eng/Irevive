@@ -107,3 +107,29 @@ python3 -m http.server 8000
 
 Във футъра е добавена бележка, че Irevive е независим сервиз и не е свързан с
 Apple Inc. Това е важно да остане, ако не сте оторизиран сервиз на Apple.
+
+## Качване във Vercel
+
+Сайтът е статичен — Vercel не се нуждае от билд команда. В хранилището има
+`vercel.json` с готовите настройки (кеширане и базови заглавия за сигурност).
+
+### Импорт от GitHub (препоръчително)
+
+1. Отворете [vercel.com/new](https://vercel.com/new)
+2. **Import Git Repository** → изберете `adelinachopanowa-eng/Irevive`
+3. Framework Preset: **Other** (Build Command и Output Directory се оставят празни)
+4. **Deploy**
+
+След това всяко качване (`git push`) в основния клон се публикува автоматично.
+
+Забележка: в момента основният клон на хранилището е
+`claude/irevive-apple-repair-site-gw4h13`. Vercel ще го използва като
+production клон. Ако предпочитате `main`, слейте клона в `main` и сменете
+Production Branch в Settings → Git.
+
+### Собствен домейн
+
+Settings → Domains → Add → `irevive.bg`. Vercel показва кои DNS записи да
+добавите при регистратора на домейна. След това заменете `https://irevive.bg`
+в `sitemap.xml`, `robots.txt` и в `<link rel="canonical">` на страниците, ако
+домейнът е различен.
