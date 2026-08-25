@@ -1009,16 +1009,51 @@ table.price th[scope="row"] { font-weight: 600; }
   }
 }
 
-/* --------------------------------------------------------------------------
-   19. Появяване при скрол
-   -------------------------------------------------------------------------- */
-.reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity .6s var(--ease), transform .6s var(--ease);
-}
-.reveal.is-in { opacity: 1; transform: none; }
+@page { margin: 14mm 12mm; }
 
 @media print {
-  .header, .topbar, .fab, .footer, .cta { display: none !important; }
+  /* Интерактивното отпада, съдържанието остава. */
+  .fab, .nav, .burger, .header__actions, .hero__demo, .skip-link { display: none !important; }
+
+  html { scroll-padding-top: 0; }
+  body { font-size: 11pt; line-height: 1.45; background: #fff; }
+
+  .header { position: static; background: #fff; border-bottom: 1px solid #ccc; }
+  .topbar { background: #fff; color: #000; border-bottom: 1px solid #ccc; }
+  .topbar a { color: #000; }
+
+
+  .section, .section--tight, .page-hero, .hero__inner { padding: 14pt 0; }
+  .container { max-width: none; padding-inline: 0; }
+  .hero__inner, .split, .courier, .contact-grid, .page-hero__inner {
+    display: block;
+  }
+
+  /* Тъмните панели се обръщат в светли — иначе излизат като черни петна. */
+  .courier, .cta, .footer {
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #ccc;
+    border-radius: 0;
+  }
+  .courier h2, .cta h2, .footer h4, .footer .logo { color: #000 !important; }
+  .courier p, .cta p, .courier__list li, .footer, .footer a { color: #333 !important; }
+  .cta::before { display: none; }
+
+  /* Нищо не се разкъсва по средата между две страници. */
+  .card, .repair, .step, .tile, .faq details, table.price tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+
+  .faq details { border: 1px solid #ccc; }
+  .faq .faq__body { display: block !important; }
+
+  .btn { border: 1px solid #999 !important; background: #fff !important; color: #000 !important; }
+  .table-wrap { overflow: visible; border: 1px solid #ccc; }
+  table.price { min-width: 0; }
+
+  /* Адресът на връзката се отпечатва след текста ѝ. */
+  main a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; color: #555; }
 }

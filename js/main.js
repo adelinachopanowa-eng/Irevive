@@ -36,27 +36,6 @@
   }
 
   /* ---------------------------------------------------------------------
-     Появяване на секциите при скрол
-     --------------------------------------------------------------------- */
-  var revealables = document.querySelectorAll('.reveal');
-  if (revealables.length) {
-    if (!('IntersectionObserver' in window) ||
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      revealables.forEach(function (el) { el.classList.add('is-in'); });
-    } else {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-in');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
-      revealables.forEach(function (el) { io.observe(el); });
-    }
-  }
-
-  /* ---------------------------------------------------------------------
      Форма за запитване
      Без бекенд: съобщението се отваря в пощенския клиент на потребителя.
      За автоматично изпращане вижте README.md (Formspree / Netlify Forms).
