@@ -323,96 +323,136 @@ ul { margin: 0 0 1em; padding-left: 1.15em; }
 
 /* --------------------------------------------------------------------------
    5. Hero
+   Лявата колона носи обещанието, дясната го показва: примерен разговор във
+   Viber, в който офертата идва пет минути след снимката.
    -------------------------------------------------------------------------- */
 .hero {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(820px 480px at 76% 16%, #e9f1fb 0%, rgba(233, 241, 251, 0) 64%),
-    linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 100%);
+    radial-gradient(760px 460px at 78% 8%, #e7effa 0%, rgba(231, 239, 250, 0) 66%),
+    linear-gradient(180deg, #fbfbfd 0%, #f4f4f7 100%);
   border-bottom: 1px solid var(--line-soft);
 }
 .hero__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr);
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
   align-items: center;
-  gap: clamp(24px, 4vw, 56px);
-  padding: clamp(44px, 6vw, 76px) 0;
+  gap: clamp(28px, 5vw, 72px);
+  padding: clamp(44px, 5.5vw, 80px) 0;
 }
 
-.hero h1 {
-  margin-bottom: 18px;
-  /* Кирилските думи са дълги — пренасяне само между думи, никога в дума. */
-  overflow-wrap: normal;
-  hyphens: none;
-}
-.hero h1 em { font-style: normal; color: var(--brand); }
-
+.hero h1 { margin-bottom: 18px; }
 .hero__lead {
-  font-size: clamp(1.02rem, 1.5vw, 1.18rem);
+  font-size: clamp(1.04rem, 1.5vw, 1.2rem);
   color: var(--ink-soft);
-  max-width: 40ch;
-  margin-bottom: 26px;
+  max-width: 42ch;
+  margin-bottom: 28px;
 }
 
-.hero__chips {
+/* Кратък ред с гаранциите — топбарът носи само работна информация. */
+.trust {
   display: flex;
   flex-wrap: wrap;
-  gap: 9px;
-  margin: 26px 0 0;
+  gap: 8px 24px;
+  margin: 28px 0 0;
   padding: 0;
   list-style: none;
 }
-.hero__chips li {
+.trust li {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 8px 15px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .9);
-  border: 1px solid var(--line);
-  font-size: .87rem;
+  gap: 8px;
+  font-size: .92rem;
   font-weight: 600;
   color: var(--ink-soft);
-  box-shadow: var(--shadow-sm);
 }
-.hero__chips svg { width: 15px; height: 15px; color: var(--success); flex: none; }
+.trust svg { width: 17px; height: 17px; color: var(--success); flex: none; }
 
-.hero__art {
-  position: relative;
-  display: grid;
-  place-items: center;
-  min-height: 320px;
+/* --- Примерният разговор -------------------------------------------------- */
+.hero__demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
 }
-.hero__art > svg {
-  /* Ограничаваме по височина — иначе телефонът разтяга целия екран. */
-  width: auto;
-  max-width: 100%;
-  height: min(52vh, 420px);
-  filter: drop-shadow(0 26px 44px rgba(0, 0, 0, .16));
+.hero__demo figcaption {
+  font-size: .8rem;
+  color: var(--muted);
+  text-align: center;
+  max-width: 30ch;
 }
 
-.hero__badge {
-  position: absolute;
-  left: 0;
-  bottom: 8%;
+.chat {
+  width: min(100%, 336px);
+  border-radius: 34px;
+  background: #0b0b0e;
+  padding: 9px;
+  box-shadow: 0 30px 60px rgba(16, 16, 24, .22), 0 4px 12px rgba(16, 16, 24, .12);
+}
+.chat__bar {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 13px 19px;
-  border-radius: var(--radius);
+  gap: 11px;
+  padding: 15px 16px 13px;
+  border-radius: 26px 26px 0 0;
+  background: var(--viber);
+  color: #fff;
+}
+.chat__bar svg { width: 26px; height: 26px; flex: none; }
+.chat__bar b { display: block; font-size: .95rem; line-height: 1.25; }
+.chat__bar small { font-size: .74rem; opacity: .82; }
+
+.chat__body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 13px 20px;
+  border-radius: 0 0 26px 26px;
+  background: #eef0f5;
+}
+
+.bubble {
+  position: relative;
+  max-width: 88%;
+  padding: 10px 13px 22px;
+  border-radius: 16px;
+  font-size: .87rem;
+  line-height: 1.45;
+  color: var(--ink);
   background: #fff;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
 }
-.hero__badge strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  line-height: 1.1;
-  letter-spacing: -.02em;
+.bubble p { margin: 0; }
+.bubble b { color: var(--brand); font-weight: 700; }
+.bubble time {
+  position: absolute;
+  right: 12px;
+  bottom: 7px;
+  font-size: .68rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
-.hero__badge small { display: block; color: var(--muted); font-size: .82rem; }
-.hero__badge > svg { width: 28px; height: 28px; color: var(--brand); flex: none; }
+/* Посетителят чете разговора от своя телефон: неговите съобщения са вдясно,
+   отговорите на Irevive — вляво, точно както изглежда във Viber. */
+.bubble--me {
+  align-self: flex-end;
+  max-width: 78%;
+  background: #ece8fd;
+  border-bottom-right-radius: 16px;
+}
+.bubble--them { align-self: flex-start; border-bottom-left-radius: 16px; }
+.bubble--tail { border-bottom-left-radius: 5px; }
+
+.bubble__photo {
+  width: 100%;
+  margin-bottom: 9px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #11161f;
+}
+.bubble__photo svg { width: 100%; height: auto; display: block; }
 
 /* --------------------------------------------------------------------------
    6. Плочки за устройства
@@ -507,33 +547,35 @@ ul { margin: 0 0 1em; padding-left: 1.15em; }
 .repair__top svg { width: 28px; height: 28px; color: var(--brand); flex: none; }
 .repair h3 { margin: 0; font-size: 1.1rem; }
 .repair p { color: var(--muted); font-size: .95rem; }
+/* Две еднакви клетки — така всички карти в реда завършват на един ред. */
 .repair__meta {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 18px;
   margin-top: auto;
-  padding-top: 18px;
+  padding-top: 16px;
   border-top: 1px solid var(--line-soft);
-  font-size: .9rem;
+}
+.repair__meta > div { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.repair__meta > div + div { text-align: right; }
+.repair__meta span {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
   color: var(--muted);
 }
-.repair__meta b { font-size: 1.05rem; color: var(--ink); }
-
-.ribbon {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: var(--brand-soft);
-  color: var(--brand-dark);
-  font-size: .78rem;
-  font-weight: 700;
-  letter-spacing: .01em;
+.repair__meta b {
+  font-family: var(--font-display);
+  font-size: 1.06rem;
+  letter-spacing: -.01em;
+  color: var(--ink);
 }
-.ribbon--gift { background: #fdeceb; color: #c0271c; }
-.ribbon--green { background: #e6f6ec; color: var(--success); }
+.repair__meta > div + div b {
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
 
 /* --------------------------------------------------------------------------
    9. Стъпки „Как работи“
@@ -583,24 +625,7 @@ ul { margin: 0 0 1em; padding-left: 1.15em; }
 }
 .courier h2 { color: #fff; }
 .courier p { color: #c7c7cc; }
-.courier__logos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 24px;
-}
-.courier__logos span {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 12px 20px;
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, .08);
-  border: 1px solid rgba(255, 255, 255, .14);
-  font-weight: 700;
-  letter-spacing: .01em;
-}
-.courier__logos svg { width: 20px; height: 20px; color: #fff; }
+.courier .btn { margin-top: 26px; }
 .courier__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
 .courier__list li {
   display: flex;
@@ -768,14 +793,39 @@ table.price th[scope="row"] { font-weight: 600; }
    14. CTA лента
    -------------------------------------------------------------------------- */
 .cta {
-  padding: clamp(38px, 5vw, 62px) clamp(24px, 4vw, 56px);
+  position: relative;
+  overflow: hidden;
+  padding: clamp(40px, 5vw, 66px) clamp(24px, 4vw, 56px);
   border-radius: var(--radius-xl);
-  background: linear-gradient(135deg, #0071e3 0%, #4b23c9 100%);
+  /* Плътно синьо, а не тъмно: футърът вече е тъмен и двата блока се сливаха.
+     #0060c0 дава 6.3:1 контраст с бял текст. */
+  background: #0060c0;
   color: #fff;
   text-align: center;
 }
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: -45% 25% auto;
+  height: 340px;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, .18), transparent);
+  pointer-events: none;
+}
+.cta > * { position: relative; }
 .cta h2 { color: #fff; margin-bottom: .4em; }
-.cta p { color: rgba(255, 255, 255, .88); max-width: 620px; margin: 0 auto 26px; }
+.cta p { color: rgba(255, 255, 255, .9); max-width: 58ch; margin: 0 auto 28px; }
+
+.btn--viber-icon svg { color: var(--viber); }
+
+.btn--outline-light {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .45);
+  color: #fff;
+}
+.btn--outline-light:hover {
+  background: rgba(255, 255, 255, .12);
+  border-color: #fff;
+}
 
 /* --------------------------------------------------------------------------
    15. Странична навигация за устройства
@@ -925,33 +975,27 @@ table.price th[scope="row"] { font-weight: 600; }
   .courier,
   .contact-grid { grid-template-columns: 1fr; }
 
-  /* На тесен екран водещи са заглавието и бутоните, илюстрацията идва след тях. */
-  .hero__inner { gap: 30px; }
-  .hero__art { order: 0; min-height: 0; gap: 16px; }
-  .hero__art > svg { width: auto; height: min(34vh, 280px); }
-  .hero__badge {
-    position: static;
-    padding: 11px 18px;
-    box-shadow: var(--shadow);
-  }
+  /* На тесен екран водещи са заглавието и бутоните, разговорът идва след тях. */
+  .hero__inner { gap: 34px; }
+  .hero__demo { order: 0; }
+  .chat { width: min(100%, 320px); }
   .page-hero__art { order: 0; }
   .page-hero__art > svg { width: auto; height: min(26vh, 200px); }
 }
 
 @media (max-width: 640px) {
   body { font-size: 16px; }
+  /* На телефон топбарът остава един ред — останалото е в хедъра и футъра. */
   .topbar__inner { gap: 16px; font-size: .74rem; }
-  .topbar span:nth-child(n+3) { display: none; }
+  .topbar span:nth-child(n+2) { display: none; }
   .form__grid { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr; }
   .btn-row .btn { width: 100%; }
   .fab { padding: 13px 18px; }
   .fab span { display: none; }
-  .hero__inner { gap: 26px; }
-  .hero__art > svg { height: min(30vh, 230px); }
-  .hero__badge { padding: 10px 16px; }
-  .hero__badge strong { font-size: 1.15rem; }
-  .hero__badge small { font-size: .78rem; white-space: nowrap; }
+  .hero__inner { gap: 28px; }
+  .trust { gap: 8px 18px; }
+  .trust li { font-size: .88rem; }
   .page-hero__art > svg { height: min(22vh, 165px); }
   .cta { border-radius: var(--radius-lg); }
   .courier { border-radius: var(--radius-lg); }

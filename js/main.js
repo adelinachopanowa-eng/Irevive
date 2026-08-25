@@ -101,7 +101,7 @@
       ];
 
       var subject = 'Запитване за ремонт — ' + (get('device') || 'Apple устройство');
-      var mailto = 'mailto:' + (form.dataset.email || 'info@irevive.bg') +
+      var mailto = 'mailto:' + (form.dataset.email || 'revivebg@gmail.com') +
         '?subject=' + encodeURIComponent(subject) +
         '&body=' + encodeURIComponent(lines.join('\n'));
 
